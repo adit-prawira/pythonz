@@ -36,4 +36,4 @@ class CoffeeMaker:
         """
         for item in order.ingredients:
             self.resources[item] -= order.ingredients[item]
-        print("Your order has been made")
+        print(f"Your {order.name} has been made")

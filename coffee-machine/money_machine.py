@@ -28,7 +28,7 @@ class MoneyMachine:
         # process coins first to make sure if customer using coins or not
         self.process_coins()
         if self.money_received >= cost:
-            change = round(money_received - cost, 2) # round to 2 significant figures
+            change = round(self.money_received - cost, 2) # round to 2 significant figures
             print(f"Transaction status: Completed\nChange: {self.CURRENCY}{change}\n")
             self.profit += cost
             self.money_received = 0
