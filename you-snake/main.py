@@ -47,4 +47,5 @@ while is_started:
         if(snake.head.distance(seg) < 10):
             is_started = False
             score_board.game_over()
+            
 screen.exitonclick()
