@@ -28,6 +28,7 @@ class Snake:
         
         # updates the head position
         self.head.forward(MOVE_STEP)
+        
     def valid_heading(self, direction, opposite):
         if(self.head.heading() != opposite):
             self.head.setheading(direction)
@@ -40,4 +41,15 @@ class Snake:
         self.valid_heading(direction = RIGHT, opposite = LEFT)
     def left(self):
         self.valid_heading(direction = LEFT, opposite = RIGHT)
+    
+    def grow(self):
+        tail_post =len(self.segs)-1
+        tail = self.segs[tail_post]
+        new_x = tail.xcor()
+        new_y = tail.ycor()
         
+        seg = Turtle("square")
+        seg.color("azure")
+        seg.penup()
+        seg.goto(new_x, new_y)
+        self.segs.append(seg)
