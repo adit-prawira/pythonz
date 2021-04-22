@@ -44,11 +44,12 @@ while(has_started):
         else:
             print(f"You've lost the bet! The {color} bot has win the race!")
         has_started = False
-        #is_over = True
+        is_over = True
 
 # screen will listen to any event when the program start
 screen.listen()
 
 
 # exit the gui when on
-screen.exitonclick()
+if(is_over):
+    screen.bye()
