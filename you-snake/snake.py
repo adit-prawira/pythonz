@@ -43,8 +43,7 @@ class Snake:
         self.valid_heading(direction = LEFT, opposite = RIGHT)
     
     def grow(self):
-        tail_post =len(self.segs)-1
-        tail = self.segs[tail_post]
+        tail = self.segs[-1]
         new_x = tail.xcor()
         new_y = tail.ycor()
         

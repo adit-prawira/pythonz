@@ -23,8 +23,9 @@ screen.onkey(snake.down, "Down")
 screen.onkey(snake.right, "Right")
 screen.onkey(snake.left, "Left")
 
-has_started = True
-while has_started:
+is_started = True
+
+while is_started:
     screen.update()
     time.sleep(0.1)
     snake.move()
@@ -36,4 +37,14 @@ while has_started:
         snake.grow()
         score_board.add_score()
         
+    # collision with wall
+    if(snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280):
+        is_started = False
+        score_board.game_over()
+    
+    # collision with tail
+    for seg in snake.segs[1:]:
+        if(snake.head.distance(seg) < 10):
+            is_started = False
+            score_board.game_over()
 screen.exitonclick()
