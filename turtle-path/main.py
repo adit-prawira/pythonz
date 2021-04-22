@@ -61,7 +61,6 @@ def hirst_painting():
             bot.setheading(180)
             bot.forward(500)
             bot.setheading(0)
-        
 if(option == 1):
     random_path()
 elif(option ==2):
