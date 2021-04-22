@@ -8,11 +8,17 @@ screen.bgcolor("#373c4e")
 screen.title("Build Pong")
 screen.tracer(0)
 
-paddle = Paddle()
-
+right_paddle = Paddle((350,0))
+left_paddle = Paddle((-350,0))
 screen.listen()
-screen.onkey(paddle.move_up, "Up")
-screen.onkey(paddle.move_down, "Down")
+
+# right paddle with up and down key control
+screen.onkey(right_paddle.move_up, "Up")
+screen.onkey(right_paddle.move_down, "Down")
+
+# left paddle with w and s key to control vertical movement
+screen.onkey(left_paddle.move_up, "w")
+screen.onkey(left_paddle.move_down, "s")
 
 is_started = True
 while is_started:
