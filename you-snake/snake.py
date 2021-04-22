@@ -1,10 +1,15 @@
 from turtle import Turtle
 INITIAL_POSITIONS = [(0,0), (-20, 0), (-40, 0)]
 MOVE_STEP = 20
+UP = 90
+DOWN = 270
+RIGHT = 0
+LEFT= 180
 class Snake:
     def __init__(self):
         self.segs = []
         self.create_snake()
+        self.head = self.segs[0]
     
     def create_snake(self):
         for coordinate in INITIAL_POSITIONS:
@@ -22,15 +27,17 @@ class Snake:
             self.segs[seg_num].goto(new_x, new_y)
         
         # updates the head position
-        head = self.segs[0]
-        head.forward(MOVE_STEP)
+        self.head.forward(MOVE_STEP)
+    def valid_heading(self, direction, opposite):
+        if(self.head.heading() != opposite):
+            self.head.setheading(direction)
     
     def up(self):
-        self.segs[0].setheading(90)
+        self.valid_heading(direction = UP, opposite = DOWN)
     def down(self):
-        self.segs[0].setheading(270)
+        self.valid_heading(direction = DOWN, opposite = UP)
     def right(self):
-        self.segs[0].setheading(0)
+        self.valid_heading(direction = RIGHT, opposite = LEFT)
     def left(self):
-        self.segs[0].setheading(180)
+        self.valid_heading(direction = LEFT, opposite = RIGHT)
         
