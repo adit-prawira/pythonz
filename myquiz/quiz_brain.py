@@ -19,9 +19,6 @@ class QuizBrain:
         correctAnswer = self.currentQuestion.answer
         if userAnswer.lower() == correctAnswer.lower():
             self.score += 1
-            print("Correct!")
+            return True
         else:
-            print("Wrong!")
-
-        print(f"Your Score: {self.score}/{self.questionNumber}")
-        print("\n")
+            return False

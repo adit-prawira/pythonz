@@ -9,7 +9,7 @@ class QuizInterface :
         self.window = Tk()
         self.window.title("Quiz Me")
         self.window.config(padx=20,pady=20, bg=THEME_COLOR)
-        self.scoreLabel = Label(text=f"Score:{0}", bg = THEME_COLOR, fg = "white")
+        self.scoreLabel = Label(text=f"Score:{self.quiz.score}", bg = THEME_COLOR, fg = "white")
         
         self.scoreLabel.grid(row = 0, column = 1)
         
@@ -24,18 +24,37 @@ class QuizInterface :
         self.canvas.grid(row = 1, column =0 , columnspan = 2, pady = 50)
         
         trueLogo = PhotoImage(file = "images/true.png")
-        self.trueButton = Button(image = trueLogo, highlightthickness=0)
+        self.trueButton = Button(image = trueLogo, highlightthickness=0, command = self.answerTrue)
         self.trueButton.grid(row = 2, column = 0)
         
         falseLogo = PhotoImage(file = "images/false.png")
-        self.falseButton = Button(image = falseLogo, highlightthickness=0)
+        self.falseButton = Button(image = falseLogo, highlightthickness=0, command = self.answerFalse)
         self.falseButton.grid(row = 2, column = 1)
         
         self.getNextQuestion()
         self.window.mainloop()
         
     def getNextQuestion(self):
-        qText = self.quiz.nextQuestion()
-        print(qText)
-        self.canvas.itemconfig(self.questionText, text = qText)
+        self.canvas.config(bg = "white")
+        if(self.quiz.hasMoreQuestions()):
+            self.scoreLabel.config(text=f"Score:{self.quiz.score}")
+            qText = self.quiz.nextQuestion()
+            self.canvas.itemconfig(self.questionText, text = qText)
+        else:
+            self.canvas.itemconfig(self.questionText, text = "You've reached the end of the quiz")
+            self.trueButton.config(state="disabled")
+            self.falseButton.config(state="disabled")
+    def answerTrue(self):
+        self.giveFeedback(self.quiz.checkAnswer("True"))
+    
+    def answerFalse(self):
+        self.giveFeedback(self.quiz.checkAnswer("False"))
+    
+    def giveFeedback(self, isRight):
+        if isRight:
+            self.canvas.config(bg = "#d3e9a6")
+        else:
+            self.canvas.config(bg = "#f07684")
+            
+        self.window.after(1000, self.getNextQuestion)
         
